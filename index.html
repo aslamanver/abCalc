@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Calc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.tabs').tabs({
+        swipeable: true
+      });
+
+      $('.fr').keyup(function(){
+        getFirstAns()
+      });
+      $('.sd').keyup(function(){
+        getSecondAns()
+      });
+
+    });
+
+    function getFirstAns() {
+      var p = parseFloat($('#fr-purchase').val());
+      var s = parseFloat($('#fr-selling').val());
+      var ans = ( ( s - p ) / p );
+      if(isNaN(ans)) ans = 0;
+      $('#fr-answer').text( ans.toFixed(2) );
+    }
+    function getSecondAns() {
+      var p = parseFloat($('#sd-purchase').val());
+      var c = parseFloat($('#sd-percentage').val());
+      var sp = ( (p * c) / 100);
+      var ans = sp + p;
+      var dans = p - sp;
+      if(isNaN(ans)) ans = 0;
+      if(isNaN(sp)) sp = 0;
+      if(isNaN(dans)) dans = 0;
+      $('#sd-answer').text( sp );
+      $('#sd-answer-2').text( 'Selling = ' + ans );
+      $('#sd-answer-3').text( 'Discount = ' + dans );
+    }
+    </script>
+    <style media="screen">
+      body {
+        height: 100%;
+        background: #f7f7f7
+      }
+      #test1 {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="col s12" style="padding:0">
+        <ul class="tabs">
+          <li class="tab col s6 blue lighten-5"><a href="#test1">%</a></li>
+          <li class="tab col s6 indigo lighten-5"><a href="#test2">/=</a></li>
+        </ul>
+      </div>
+      <div id="test1" class="col s12">
+
+        <div class="input-field col s6">
+          <input id="fr-purchase" type="number" class="validate fr">
+          <label>Purchase</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="fr-selling" type="number" class="validate fr">
+          <label>Selling</label>
+        </div>
+
+        <div class="col s12 center">
+
+         <div class="card horizontal">
+           <div class="card-stacked">
+             <div class="card-content">
+               <h1><span id="fr-answer">0</span> %</h1>
+             </div>
+           </div>
+         </div>
+
+        </div>
+
+      </div>
+      <div id="test2" class="col s12">
+
+        <div class="input-field col s6">
+          <input id="sd-purchase" type="number" class="validate sd">
+          <label>Purchase</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input max="100" id="sd-percentage" type="number" class="validate sd">
+          <label>Percentage</label>
+        </div>
+
+        <div class="col s12">
+
+         <div class="card horizontal">
+           <div class="card-stacked">
+             <div class="card-content">
+               <h1><span id="sd-answer">0</span> /=</h1>
+               <h2><span id="sd-answer-2">0</span></h2>
+               <h2><span id="sd-answer-3">0</span></h2>
+             </div>
+           </div>
+         </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>
